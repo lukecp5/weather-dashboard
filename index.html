@@ -16,9 +16,33 @@
       integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
       crossorigin="anonymous"
     />
+    <link rel="stylesheet" href="assets/css/style.css"
   </head>
   <body>
-    <header></header>
+    <header class="col-12 text-center">
+      <div class="container-fluid" id="weatherDashboard">
+        <h1 class="font-weight-bold text-light">Weather Dashboard</h1>
+      </div>
+    </header>
+    <main>
+      <div class="container-fluid">
+        <!-- Content here -->
+        <div class="row">
+          <div class="col-12 col-md-3" id="searchCol">
+            <!-- + Search Box -->
+            <div class="card">
+              <div class="card-body">
+                <h2 class="card-title font-weight-bold" id="searchLabel">Search for a city:</h5>
+                <input type="text" class="form-text mb-2 w-100 py-2">
+                  <button class="btn-primary btn w-100">Search</button>
+              </div>
+            </div>
+          </div>
+          <div class="col-12 col-md-9" id="weatherCol"></div>
+        </div>
+      </div>
+    </main>
+
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script

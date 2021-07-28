@@ -4,8 +4,7 @@ var dayAmt = 6;
 var lat = 0;
 var lon = 0;
 var mainUrl = "https://api.openweathermap.org/data/2.5/onecall?lat=" + lat + "&lon=" + lon + "&exclude=hourly,minutely&units=imperial&appid=" + APIKey;
-var firstUrl = "https://api.openweathermap.org/data/2.5/weather?q=" + city + "&appid="+ APIKey;
-
+var firstUrl = "http://api.openweathermap.org/geo/1.0/direct?q=" + city + "&limit=1&appid=" + APIKey;
 // ~! Fetches coordinates for the searched city and stores them in the lat & lon variables
 function getCoordinates(){
       fetch(firstUrl)
@@ -13,9 +12,7 @@ function getCoordinates(){
             return response.json();
       })
       .then(function(data){
-            lat = data.coord.lat;
-            lon = data.coord.lon;
-            console.log(lat + " --- " + lon)
+            console.log(data)
       })
 }
 
