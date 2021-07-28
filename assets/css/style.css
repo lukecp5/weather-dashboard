@@ -12,25 +12,27 @@ html {
 #searchLabel{
       font-size: 2rem;
 }
+.currentWeather{
+      font-size: 1.2rem;
+      font-weight: 600;
+      padding: .4rem 0;
+}
     
-    
-    @media screen and (min-width: 360px) {
+@media screen and (min-width: 360px) {
       html {
         font-size: 12px;
       }
-    @media screen and (min-width: 480px) {
+}
+@media screen and (min-width: 480px) {
       html {
         font-size: 14px;
       }
     }
-    @media screen and (min-width: 768px){
+@media screen and (min-width: 768px){
       html {
         font-size: 16px;
       }
     }
-    
-    @include media-breakpoint-up(lg) {
-      html {
-        font-size: 1.6rem;
-      }
-    }
+@media screen and (min-width: 1366) {
+      
+}
