@@ -30,17 +30,31 @@
           <div class="card">
             <div class="card-body">
               <h2 class="card-title font-weight-bold" id="searchLabel">Search for a city:</h5>
-                <input type="text" class="form-text mb-2 w-100 py-2">
-                <button class="btn-primary btn w-100">Search</button>
-            </div>
+                <form class="form-group">
+                <input type="text" class="form-text mb-2 w-100 py-2" id="citySearch">
+                <button class="btn-primary btn w-100" id="search-button" role="search">Search</button>
+                  </form>
+              </div>
           </div>
+          <div class="list-group">
+          <ul id="history">
+            <li><button class="historyButton btn" data-location="Austin">Austin</button></li>
+            <li><button class="historyButton btn" data-location="Atlanta">Atlanta</button></li>
+          </ul>
+        </div>
         </div>
         <!-- ------- End of Search Box ----------->
+        <!-- <div class="col-md-3">
+          <ul id="searchHistory">
+            <li><button class="history btn-light " data-location="Austin">Austin</button></li>
+            <li><button class="history" data-location="Atlanta">Atlanta</button></li>
+          </ul>
 
+        </div> -->
 
         <!-- ------- Today's Weather Box ----------->
         <div class="col-12 col-md-9 py-3 px-2" id="weatherCol">
-          <div class="card">
+          <div class="card" id="todaysWeatherCard">
             <div class="card-body">
               <h2 class="font-weight-bold card-title"><span id="cityName">City Name</span> <span id="currentDate">07/21/2021</span>
                 <span id="weatherIcon"><i class="fas fa-cloud-sun"></i></span></h2>
@@ -50,8 +64,26 @@
                 <p class="card-text currentWeather">UV Index: <span id="currentUVI">.46</span></p>
             </div>
           </div>
+          </div>
+          <div class="col-md">
+          <div class="card-group" id="dayCards">
+            <div class="card">
+            <div class="card-body">
+              <h3 class="card-title">03/31/2021</h3>
+              <dl>
+                <dt>Temp:</dt>
+                <dd>74*</dd>
+                <dt>Wind:</dt>
+                <dd>Windy</dd>
+                <dt>Humidity:</dt>
+                <dd>66%</dd>
+              </dl>
+            </div>
+            </div>
+          </div>
+            
+        
         </div>
-
         <!-- ------- End of Weather Box ----------->
       </div>
     </div>
