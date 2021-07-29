@@ -19,6 +19,7 @@ var cardHolder = document.querySelector("#dayCards")
 // var weatherData;
 var searchButtonEl = document.querySelector("#search-button");
 var searchInputEl = document.querySelector("#citySearch");
+console.log(searchInputEl)
 var cityNameEl = document.querySelector("#cityName");
 // ~! Fetches coordinates for the searched city and stores them in the lat & lon variables
 function getCoordinates(location) {
@@ -53,7 +54,8 @@ console.log(mainUrl);
     .then(function (data) {
       console.log("This is the weather data from onecall: " + data);
       var weatherData = data;
-      for(i = 0; i <6; i++){
+      // for(i = 0; i <2; i++){
+      cardHolder.innerHTML = '';
             for(day in data.daily){
                   var dateObject = new Date(data.daily[day].dt * 1000);
                   var date = dateObject.toString();
@@ -78,7 +80,7 @@ console.log(mainUrl);
                   newCard.innerHTML = content;
                   cardHolder.appendChild(newCard);
             }
-      }
+      // }
       for (day in data.daily) {
         var dateObject = new Date(data.daily[day].dt * 1000);
         console.log("Date: " + dateObject.toString()); //data.daily[day]
@@ -117,13 +119,10 @@ function updateContentPane(evt) {
   getCoordinates(location);
 }
 
-function getLocation(evt) {
-      if(evt){
-  evt.preventDefault();
-  console.log(evt);
-      }
-  city = searchInputEl.value;
-  getCoordinates();
+function getLocation(event) {
+ event.preventDefault();
+  var location = searchInputEl.value;
+  getCoordinates(location);
 //   getWeather();
 }
 
