@@ -25,7 +25,7 @@ var cityNameEl = document.querySelector("#cityName");
 // ~! Fetches coordinates for the searched city and stores them in the lat & lon variables
 function getCoordinates(location) {
   var firstUrl =
-    "http://api.openweathermap.org/geo/1.0/direct?q=" +
+    "https://api.openweathermap.org/geo/1.0/direct?q=" +
     location +
     "&appid=" +
     APIKey;
