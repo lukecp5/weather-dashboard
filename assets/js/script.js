@@ -83,7 +83,7 @@ function getWeather(lat, lon) {
 
       // ! Fills in the data for the current day's weather
       var dateObject = new Date(data.daily[0].dt * 1000);
-      var month = dateObject.getMonth();
+      var month = dateObject.getMonth() + 1;
       var day = dateObject.getDate();
       var year = dateObject.getFullYear();
       console.log("Current Day" + (month + 1) + "/" + day + "/" + year);
