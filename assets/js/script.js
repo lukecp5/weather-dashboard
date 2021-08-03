@@ -11,7 +11,7 @@ var mainUrl =
   lon +
   "&exclude=hourly,minutely&units=imperial&appid=" +
   APIKey;
-var cardHolder = document.querySelector("#dayCards")
+var cardHolder = document.querySelector("#dayCards");
 // var locations = JSON.parse(localStorage.getItem("locations"));
 // console.log(locations);
 // var url = `${apiUrl}/data/2.5/find?q=${location}&appid=${APIKey}`;
@@ -20,11 +20,15 @@ var cardHolder = document.querySelector("#dayCards")
 // var weatherData;
 var searchButtonEl = document.querySelector("#search-button");
 var searchInputEl = document.querySelector("#citySearch");
-console.log(searchInputEl)
+console.log(searchInputEl);
 var cityNameEl = document.querySelector("#cityName");
 // ~! Fetches coordinates for the searched city and stores them in the lat & lon variables
 function getCoordinates(location) {
-      var firstUrl = "http://api.openweathermap.org/geo/1.0/direct?q=" + location + "&appid=" + APIKey;
+  var firstUrl =
+    "http://api.openweathermap.org/geo/1.0/direct?q=" +
+    location +
+    "&appid=" +
+    APIKey;
   fetch(firstUrl)
     .then(function (response) {
       return response.json();
@@ -37,13 +41,12 @@ function getCoordinates(location) {
       console.log(lat);
       console.log(lon);
       setCityName(data);
-      getWeather(lat,lon);
+      getWeather(lat, lon);
       // handleSuccessfulLocationFetch(data);
-
     });
 }
 
-function setCityName(data){
+function setCityName(data) {
   cityNameEl.textContent = data[0].name;
   handleSuccessfulLocationFetch(data);
   // cityList.push(data[0].name);
@@ -51,9 +54,15 @@ function setCityName(data){
   // displaySavedLocations();
 }
 
-function getWeather(lat,lon) {
-var mainUrl ="https://api.openweathermap.org/data/2.5/onecall?lat=" + lat + "&lon=" + lon + "&exclude=hourly,minutely&units=imperial&appid=" + APIKey;
-console.log(mainUrl);
+function getWeather(lat, lon) {
+  var mainUrl =
+    "https://api.openweathermap.org/data/2.5/onecall?lat=" +
+    lat +
+    "&lon=" +
+    lon +
+    "&exclude=hourly,minutely&units=imperial&appid=" +
+    APIKey;
+  console.log(mainUrl);
   fetch(mainUrl)
     .then(function (response) {
       return response.json();
@@ -62,47 +71,50 @@ console.log(mainUrl);
       console.log("This is the weather data from onecall: " + data);
       var weatherData = data;
       // for(i = 0; i <2; i++){
-      cardHolder.innerHTML = '';
-            // for(day in data.daily){
+      cardHolder.innerHTML = "";
+      // for(day in data.daily){
 
-              // Assigns the current weather div's spans to variables to be updated.
-              var tempEl = document.querySelector("#currentTemp");
-              var windEl = document.querySelector("#currentWind");
-              var humidityEl = document.querySelector("#currentHumidity");
-              var uvEl = document.querySelector("#currentUVI");
-              
-              // ! Fills in the data for the current day's weather
-              var dateObject = new Date(data.daily[0].dt * 1000);
-              var month = dateObject.getMonth();
-              var day = dateObject.getDate();
-              var year = dateObject.getFullYear();
-              console.log("Current Day" + (month + 1) + "/" + day + "/" + year);
-              var temp = data.daily[0].temp.day;
-              var wind = data.daily[0].wind_speed;
-              var humidity = data.daily[0].humidity;
-              var uvi = data.current.uvi;
-              console.log("Current day's weather: " + temp + "/" + wind + "/" + humidity);
-              tempEl.textContent = temp;
-              windEl.textContent = wind;
-              humidityEl.textContent = humidity;
-              uvEl.textContent = uvi;
-              // ! Produces cards for the next 5 day's weather 
-              for(d = 1; d < 6; d++){
-                var dateObject = new Date(data.daily[d].dt * 1000);
-                var month = dateObject.getMonth();
-                var day = dateObject.getDate();
-                var year = dateObject.getFullYear();
-                var date = (month + 1) + "/" + day + "/" + year;
-                console.log((month + 1) + "/" + day + "/" + year);
-                var temp = data.daily[d].temp.day;
-                var wind = data.daily[d].wind_speed;
-                var humidity = data.daily[d].humidity;
-                  // var d = data.daily;
-                  var newCard = document.createElement("div");
-                  newCard.classList = 'card';
-                  var content = `<div class="card">
+      // Assigns the current weather div's spans to variables to be updated.
+      var tempEl = document.querySelector("#currentTemp");
+      var windEl = document.querySelector("#currentWind");
+      var humidityEl = document.querySelector("#currentHumidity");
+      var uvEl = document.querySelector("#currentUVI");
+
+      // ! Fills in the data for the current day's weather
+      var dateObject = new Date(data.daily[0].dt * 1000);
+      var month = dateObject.getMonth();
+      var day = dateObject.getDate();
+      var year = dateObject.getFullYear();
+      console.log("Current Day" + (month + 1) + "/" + day + "/" + year);
+      var temp = data.daily[0].temp.day;
+      var wind = data.daily[0].wind_speed;
+      var humidity = data.daily[0].humidity;
+      var uvi = data.current.uvi;
+      console.log(
+        "Current day's weather: " + temp + "/" + wind + "/" + humidity
+      );
+      tempEl.textContent = "Temp: " + temp;
+      windEl.textContent = "Wind Speed: " + wind + "MPH";
+      humidityEl.textContent = "Humidity: " + humidity + "%";
+      uvEl.textContent = "UV Index: " + uvi;
+
+      // ! Produces cards for the next 5 day's weather
+      for (d = 1; d < 6; d++) {
+        var dateObject = new Date(data.daily[d].dt * 1000);
+        var month = dateObject.getMonth();
+        var day = dateObject.getDate();
+        var year = dateObject.getFullYear();
+        var date = month + 1 + "/" + day + "/" + year;
+        console.log(month + 1 + "/" + day + "/" + year);
+        var temp = data.daily[d].temp.day;
+        var wind = data.daily[d].wind_speed;
+        var humidity = data.daily[d].humidity;
+        // var d = data.daily;
+        var newCard = document.createElement("div");
+        newCard.classList = "card";
+        var content = `<div class="card bg-primary text-center">
                   <div class="card-body">
-                    <h3 class="card-title">${date}</h3>
+                    <h4 class="card-title">${date}</h4>
                     <dl>
                       <dt>Temp:</dt>
                       <dd>${temp}</dd>
@@ -112,10 +124,10 @@ console.log(mainUrl);
                       <dd>${humidity}</dd>
                     </dl>
                   </div>
-                  </div>`
-                  newCard.innerHTML = content;
-                  cardHolder.appendChild(newCard);
-          }
+                  </div>`;
+        newCard.innerHTML = content;
+        cardHolder.appendChild(newCard);
+      }
       // }
       for (day in data.daily) {
         var dateObject = new Date(data.daily[day].dt * 1000);
@@ -127,36 +139,36 @@ console.log(mainUrl);
 }
 function handleSuccessfulLocationFetch(data) {
   // var locations = JSON.parse(localStorage.getItem("locations"));
-  console.log("The data for success: " + data[0].name)
-  var savedLocations = localStorage.getItem("locations")
-  if(savedLocations){
+  console.log("The data for success: " + data[0].name);
+  var savedLocations = localStorage.getItem("locations");
+  if (savedLocations) {
     // var parsedLocations = savedLocations.split();
     var savedLocations = JSON.parse(savedLocations);
-    var newCity = data[0].name
+    var newCity = data[0].name;
     savedLocations.push(newCity);
     var stringLocs = JSON.stringify(savedLocations);
-    localStorage.setItem("locations", stringLocs)
+    localStorage.setItem("locations", stringLocs);
     // savedLocations.split();
     // savedLocations.push(data[0].name)
     console.log("Saved Locations: " + savedLocations);
     console.log("String Locations: " + stringLocs);
-  }else{
-  savedLocations = [];
-  savedLocations.push(data[0].name);
-  localStorage.setItem("locations", JSON.stringify(savedLocations));
+  } else {
+    savedLocations = [];
+    savedLocations.push(data[0].name);
+    localStorage.setItem("locations", JSON.stringify(savedLocations));
     // console.log(locations);
-  // if(locations === null){
-  //   locations = [];
-  // }
-  // var cityName = data[0].name;
-  // storedLocations.push(cityName);
-  // localStorage.setItem("locations", JSON.stringify(storedLocations));
+    // if(locations === null){
+    //   locations = [];
+    // }
+    // var cityName = data[0].name;
+    // storedLocations.push(cityName);
+    // localStorage.setItem("locations", JSON.stringify(storedLocations));
   }
   // localStorage.setItem("locations", JSON.stringify(locations));
   // if(locations){
   // parsedLocations = JSON.parse(locations);
   // parsedLocations.push(data[0].name);
-  // console.log(parsedLocations);  
+  // console.log(parsedLocations);
   // }
   // else{
   //   localStorage.setItem("locations", [data[0].name]);
@@ -169,20 +181,20 @@ console.log(historyEl);
 
 function displaySavedLocations() {
   // var locations = ["Chicago", "Atlanta", "Washington D.C."];
-    var locations = localStorage.getItem("locations");    
-    if(locations){      
+  var locations = localStorage.getItem("locations");
+  if (locations) {
     var parsedLocations = JSON.parse(locations);
-  parsedLocations.forEach(function (item) {
-    var listItem = document.createElement("li");
-    var content = `<button class='historyButton btn' data-location='${item}'>${item}</button>`;
-    listItem.innerHTML = content;
-    historyEl.append(listItem);
-    // Could use JQuery - Could use createElement
-    // <li><button class="historyButton btn" data-location="Austin">Austin</button></li>
+    parsedLocations.forEach(function (item) {
+      var listItem = document.createElement("li");
+      var content = `<button class='historyButton btn' data-location='${item}'>${item}</button>`;
+      listItem.innerHTML = content;
+      historyEl.append(listItem);
+      // Could use JQuery - Could use createElement
+      // <li><button class="historyButton btn" data-location="Austin">Austin</button></li>
     });
-}else{
-  return;
-}
+  } else {
+    return;
+  }
 }
 function updateContentPane(evt) {
   buttonClicked = evt.target;
@@ -192,10 +204,10 @@ function updateContentPane(evt) {
 }
 
 function getLocation(event) {
- event.preventDefault();
+  event.preventDefault();
   var location = searchInputEl.value;
   getCoordinates(location);
-//   getWeather();
+  //   getWeather();
 }
 
 function addEventListeners() {
@@ -206,8 +218,8 @@ function addEventListeners() {
 function init() {
   displaySavedLocations();
   addEventListeners();
-//   getCoordinates();
-//   getWeather();
+  //   getCoordinates();
+  //   getWeather();
 }
 // displaySavedLocations();
 init();
