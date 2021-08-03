@@ -198,6 +198,7 @@ function getLocation(event) {
 function addEventListeners() {
   historyEl.addEventListener("click", updateContentPane);
   searchButtonEl.addEventListener("click", getLocation);
+  searchButtonEl.addEventListener("touchstart", getLocation);
 }
 
 function init() {
