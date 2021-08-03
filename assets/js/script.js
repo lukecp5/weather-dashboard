@@ -47,7 +47,7 @@ function getCoordinates(location) {
 }
 
 function setCityName(data) {
-  cityNameEl.textContent = data[0].name;
+  // cityNameEl.textContent = data[0].name;
   handleSuccessfulLocationFetch(data);
   // cityList.push(data[0].name);
   // localStorage.setItem("locations", JSON.stringify(cityList));
@@ -75,10 +75,11 @@ function getWeather(lat, lon) {
       // for(day in data.daily){
 
       // Assigns the current weather div's spans to variables to be updated.
-      var tempEl = document.querySelector("#currentTemp");
-      var windEl = document.querySelector("#currentWind");
-      var humidityEl = document.querySelector("#currentHumidity");
-      var uvEl = document.querySelector("#currentUVI");
+      // var tempEl = document.querySelector("#currentTemp");
+      // var windEl = document.querySelector("#currentWind");
+      // var humidityEl = document.querySelector("#currentHumidity");
+      // var uvEl = document.querySelector("#currentUVI");
+      // var iconEl = document.querySelector("#weatherI");
 
       // ! Fills in the data for the current day's weather
       var dateObject = new Date(data.daily[0].dt * 1000);
@@ -90,13 +91,21 @@ function getWeather(lat, lon) {
       var wind = data.daily[0].wind_speed;
       var humidity = data.daily[0].humidity;
       var uvi = data.current.uvi;
+      var iconURL = data.current.weather[0].icon;
+      console.log(data);
       console.log(
         "Current day's weather: " + temp + "/" + wind + "/" + humidity
       );
-      tempEl.textContent = "Temp: " + temp;
-      windEl.textContent = "Wind Speed: " + wind + "MPH";
-      humidityEl.textContent = "Humidity: " + humidity + "%";
-      uvEl.textContent = "UV Index: " + uvi;
+      var weatherEl = document.getElementById("todaysWeatherCard");
+      var currentContent = `<div class="card-body bg-secondary" id="currentWeatherCard">
+      <h2 class="font-weight-bold card-title"><span id="cityName"></span> <span id="currentDate">${month}/${day}/${year}</span>
+      <span id="weatherIcon"><img src="http://openweathermap.org/img/wn/${iconURL}.png" id="weatherI"></span></h2>
+      <p class="card-text currentWeather">Temp: <span id="currentTemp">${temp}</span></p>
+      <p class="card-text currentWeather">Wind Speed: <span id="currentWind">${wind}</span></p>
+      <p class="card-text currentWeather">Humidity: <span id="currentHumidity">${humidity}</span></p>
+      <p class="card-text currentWeather">UVI: <span id="currentUVI">${uvi}</span></p>
+      </div>`
+      weatherEl.innerHTML = currentContent;
 
       // ! Produces cards for the next 5 day's weather
       for (d = 1; d < 6; d++) {
@@ -114,7 +123,7 @@ function getWeather(lat, lon) {
         newCard.classList = "card";
         var content = `<div class="card bg-primary text-center">
                   <div class="card-body">
-                    <h4 class="card-title">${date}</h4>
+                    <h4 class="card-title">${date}<image src="http://openweathermap.org/img/wn/${data.daily[d].weather[0].icon}.png"></h4>
                     <dl>
                       <dt>Temp:</dt>
                       <dd>${temp}</dd>
@@ -128,7 +137,6 @@ function getWeather(lat, lon) {
         newCard.innerHTML = content;
         cardHolder.appendChild(newCard);
       }
-      // }
       for (day in data.daily) {
         var dateObject = new Date(data.daily[day].dt * 1000);
         console.log("Date: " + dateObject.toString()); //data.daily[day]
@@ -138,49 +146,26 @@ function getWeather(lat, lon) {
     });
 }
 function handleSuccessfulLocationFetch(data) {
-  // var locations = JSON.parse(localStorage.getItem("locations"));
   console.log("The data for success: " + data[0].name);
   var savedLocations = localStorage.getItem("locations");
   if (savedLocations) {
-    // var parsedLocations = savedLocations.split();
     var savedLocations = JSON.parse(savedLocations);
     var newCity = data[0].name;
     savedLocations.push(newCity);
     var stringLocs = JSON.stringify(savedLocations);
     localStorage.setItem("locations", stringLocs);
-    // savedLocations.split();
-    // savedLocations.push(data[0].name)
     console.log("Saved Locations: " + savedLocations);
     console.log("String Locations: " + stringLocs);
   } else {
     savedLocations = [];
     savedLocations.push(data[0].name);
     localStorage.setItem("locations", JSON.stringify(savedLocations));
-    // console.log(locations);
-    // if(locations === null){
-    //   locations = [];
-    // }
-    // var cityName = data[0].name;
-    // storedLocations.push(cityName);
-    // localStorage.setItem("locations", JSON.stringify(storedLocations));
   }
-  // localStorage.setItem("locations", JSON.stringify(locations));
-  // if(locations){
-  // parsedLocations = JSON.parse(locations);
-  // parsedLocations.push(data[0].name);
-  // console.log(parsedLocations);
-  // }
-  // else{
-  //   localStorage.setItem("locations", [data[0].name]);
-  // }
 }
-// getCoordinates();
-// getWeather();
 var historyEl = document.getElementById("history");
 console.log(historyEl);
 
 function displaySavedLocations() {
-  // var locations = ["Chicago", "Atlanta", "Washington D.C."];
   var locations = localStorage.getItem("locations");
   if (locations) {
     var parsedLocations = JSON.parse(locations);

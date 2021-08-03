@@ -19,7 +19,7 @@ html {
       margin: .4rem 0;
 }
 
-#todaysWeatherCard{
+#currentWeatherCard{
       border: .1rem solid black;
 }
 .currentWeather{
