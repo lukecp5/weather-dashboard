@@ -123,7 +123,7 @@ function getWeather(lat, lon) {
         newCard.classList = "card";
         var content = `<div class="card bg-primary text-center">
                   <div class="card-body">
-                    <h4 class="card-title">${date}<image src="http://openweathermap.org/img/wn/${data.daily[d].weather[0].icon}.png"></h4>
+                    <h4 class="card-title">${date}<image src="https://openweathermap.org/img/wn/${data.daily[d].weather[0].icon}.png"></h4>
                     <dl>
                       <dt>Temp:</dt>
                       <dd>${temp}</dd>
