@@ -126,11 +126,11 @@ function getWeather(lat, lon) {
                     <h4 class="card-title">${date}<image src="https://openweathermap.org/img/wn/${data.daily[d].weather[0].icon}.png"></h4>
                     <dl>
                       <dt>Temp:</dt>
-                      <dd>${temp}</dd>
+                      <dd>${temp}°</dd>
                       <dt>Wind:</dt>
                       <dd>${wind}MPH</dd>
                       <dt>Humidity:</dt>
-                      <dd>${humidity}</dd>
+                      <dd>${humidity}%</dd>
                     </dl>
                   </div>
                   </div>`;
@@ -184,7 +184,6 @@ function displaySavedLocations() {
 function updateContentPane(evt) {
   buttonClicked = evt.target;
   var location = buttonClicked.getAttribute("data-location");
-  alert(location);
   getCoordinates(location);
 }
 
