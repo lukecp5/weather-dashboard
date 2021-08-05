@@ -100,7 +100,7 @@ function getWeather(lat, lon) {
       var currentContent = `<div class="card-body bg-secondary" id="currentWeatherCard">
       <h2 class="font-weight-bold card-title"><span id="cityName"></span> <span id="currentDate">${month}/${day}/${year}</span>
       <span id="weatherIcon"><img src="https://openweathermap.org/img/wn/${iconURL}.png" id="weatherI"></span></h2>
-      <p class="card-text currentWeather">Temp: <span id="currentTemp">${temp}</span></p>
+      <p class="card-text currentWeather">Temp: <span id="currentTemp">${temp}°</span></p>
       <p class="card-text currentWeather">Wind Speed: <span id="currentWind">${wind}</span></p>
       <p class="card-text currentWeather">Humidity: <span id="currentHumidity">${humidity}</span></p>
       <p class="card-text currentWeather">UVI: <span id="currentUVI">${uvi}</span></p>
